@@ -32,5 +32,4 @@ public class SkillIdHolder {
 	public void setSkillId(int skillId) {
 		this.skillId = skillId;
 	}	
-	
 }

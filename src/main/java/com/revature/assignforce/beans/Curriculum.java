@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
@@ -38,7 +37,7 @@ public class Curriculum {
 	private Boolean isCore;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "CURR_SKILLS", joinColumns = @JoinColumn(name = "CURR_ID"), inverseJoinColumns = @JoinColumn(name = "SKILL_ID"))
+	@JoinTable(name = "CURR_SKILLS")
 	private Set<SkillIdHolder> skills;
 
 	public Curriculum() {
