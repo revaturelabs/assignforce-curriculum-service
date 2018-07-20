@@ -63,7 +63,7 @@ public class CurriculumController {
 	@DeleteMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Curriculum> delete(@PathVariable("id") int id) {
 		curriculumService.delete(id);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
