@@ -9,28 +9,27 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name = "SKILLIDHOLDER")
+@Table(name="SKILLIDHOLDER")
 public class SkillIdHolder {
-
+	
 	@Id
-	@Column(name = "SKILL_ID")
-	private int skillID;
+	@Column(name="TRAINERID")
+	private int skillId;
 
 	public SkillIdHolder() {
 		super();
 	}
 
-	public SkillIdHolder(int skillID) {
+	public SkillIdHolder(int skillId) {
 		super();
-		this.skillID = skillID;
+		this.skillId = skillId;
 	}
 
-	public int getSkillID() {
-		return skillID;
+	public int getSkillId() {
+		return skillId;
 	}
 
-	public void setSkillID(int skillID) {
-		this.skillID = skillID;
-	}
-
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
+	}	
 }
