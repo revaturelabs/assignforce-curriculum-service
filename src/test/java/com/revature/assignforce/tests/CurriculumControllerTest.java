@@ -1,0 +1,200 @@
+package com.revature.assignforce.tests;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.revature.assignforce.beans.Curriculum;
+import com.revature.assignforce.beans.SkillIdHolder;
+import com.revature.assignforce.controllers.CurriculumController;
+import com.revature.assignforce.repos.CurriculumRepo;
+import com.revature.assignforce.service.CurriculumService;
+import com.revature.assignforce.service.CurriculumServiceImpl;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+public class CurriculumControllerTest {
+
+	@Configuration
+	static class CurriculumServiceTestConfiguration {
+		@Bean
+		public CurriculumService curriculumService() {
+			return new CurriculumServiceImpl();
+		}
+		@Bean
+		public CurriculumRepo curriRepository() {
+			return Mockito.mock(CurriculumRepo.class);
+		}
+		
+		@Bean
+		public CurriculumController curriController() {
+			return new CurriculumController();
+		}
+	}
+	
+	@Autowired
+	private CurriculumService curriService;
+	@Autowired
+	private CurriculumRepo curriRepository;
+	
+	@Autowired
+	private CurriculumController curriController;
+	
+	@Test
+	public void getAllTest() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(1, "Schedule1", true, true, skillSet);
+		Curriculum c2 = new Curriculum(3, "Schedule2", true, false, skillSet);
+		List<Curriculum> curriList = new ArrayList<Curriculum>();
+		curriList.add(c1);
+		curriList.add(c2);
+		Mockito.when(curriRepository.findAll()).thenReturn(curriList);
+		List<Curriculum> testList = curriController.getAll();
+		assertTrue(testList.size() == 2);
+	}
+	
+	@Test
+	public void getByIdTestOK() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(1, "Schedule1", true, true, skillSet);
+		Optional<Curriculum> op1 = Optional.ofNullable(c1);
+		Mockito.when(curriRepository.findById(1)).thenReturn(op1);
+		ResponseEntity<Curriculum> reTest = curriController.getById(1);
+		assertTrue(reTest.getBody().getId() == 1 &&  reTest.getStatusCode() == HttpStatus.OK);
+	}
+	
+	@Test
+	public void getByIdTestNotFound() {
+		ResponseEntity<Curriculum> reTest = curriController.getById(5);
+		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
+	}
+	
+	@Test
+	public void cddTestCreated() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
+		Mockito.when(curriRepository.save(c1)).thenReturn(c1);
+		ResponseEntity<Curriculum> reTest = curriController.cdd(c1);
+		assertTrue(reTest.getBody().getId() == 12 &&  reTest.getStatusCode() == HttpStatus.CREATED);
+	}
+	
+	@Test
+	public void cddTestBadRequest() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
+		ResponseEntity<Curriculum> reTest = curriController.cdd(c1);
+		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	public void updateTestCreated() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
+		c1.setIsCore(false);
+		Mockito.when(curriRepository.save(c1)).thenReturn(c1);
+		ResponseEntity<Curriculum> reTest = curriController.update(c1);
+		assertTrue(reTest.getBody().getIsCore() == false && reTest.getStatusCode() == HttpStatus.CREATED);
+	}
+	
+	@Test
+	public void updateTestBadRequest() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
+		ResponseEntity<Curriculum> reTest = curriController.update(c1);
+		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	public void deleteTest() {
+		Mockito.doNothing().when(curriRepository).deleteById(7);
+		ResponseEntity<Curriculum> reTest = curriController.delete(7);
+		assertTrue(reTest.getStatusCode() == HttpStatus.OK);
+	}
+
+}
