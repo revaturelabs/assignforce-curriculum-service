@@ -56,12 +56,12 @@ public class CurriculumControllerTest {
 	
 	@Test
 	public void getAllTest() {
-		SkillIdHolder s1 = new SkillIdHolder(1);
-		SkillIdHolder s2 = new SkillIdHolder(2);
-		SkillIdHolder s3 = new SkillIdHolder(3);
-		SkillIdHolder s4 = new SkillIdHolder(4);
-		SkillIdHolder s5 = new SkillIdHolder(5);
-		SkillIdHolder s6 = new SkillIdHolder(6);
+		SkillIdHolder s1 = new SkillIdHolder();
+		SkillIdHolder s2 = new SkillIdHolder();
+		SkillIdHolder s3 = new SkillIdHolder();
+		SkillIdHolder s4 = new SkillIdHolder();
+		SkillIdHolder s5 = new SkillIdHolder();
+		SkillIdHolder s6 = new SkillIdHolder();
 		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
 		skillSet.add(s1);
 		skillSet.add(s2);
