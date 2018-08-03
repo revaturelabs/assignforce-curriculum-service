@@ -1,7 +1,6 @@
 package com.revature.assignforce.tests;
 
 import static org.junit.Assert.assertEquals;
-
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -63,5 +62,6 @@ public class CurriculumConstraintTest {
 		assertEquals("size must be between 1 and 128", constraintViolations.iterator().next().getMessage());
 
 	}
+
 
 }
