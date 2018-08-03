@@ -48,8 +48,6 @@ public class CurriculumConstraintTest {
 	/**
 	   * This is the CurriculumEmptyString method Test to check if the constraint that 
 	   * checks that curriculum name cannot be an empty string works
-	   * @param Nothing. 
-	   * @return Nothing.
 	   */
 	@Test
 	public void CurriculumEmptyString() {
