@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.assignforce.beans.Curriculum;
+import com.revature.assignforce.messaging.messenger.CurriculumMessenger;
 import com.revature.assignforce.repos.CurriculumRepo;
 
 @Service
@@ -17,6 +18,9 @@ public class CurriculumServiceImpl implements CurriculumService {
 	
 	@Autowired
 	private CurriculumRepo currRepo;
+	
+	@Autowired
+	private CurriculumMessenger currMessenger;
 	
 	@Override
 	public List<Curriculum> getAll() {
@@ -43,6 +47,7 @@ public class CurriculumServiceImpl implements CurriculumService {
 
 	@Override
 	public void delete(int id) {
+		currMessenger.sendDeletionMessage(id);
 		currRepo.deleteById(id);
 		
 	}
