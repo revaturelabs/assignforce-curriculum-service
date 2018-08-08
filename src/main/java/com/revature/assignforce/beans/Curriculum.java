@@ -13,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.stereotype.Component;
 
@@ -28,16 +31,22 @@ public class Curriculum {
 	private int id;
 
 	@Column(name = "name")
+	@NotEmpty(message = "A curriculum must have a name.")
+	@NotNull(message = "A curriculum must have a name.")
+	@Pattern(regexp = "[a-zA-Z1-9]*", message = "Curriculum name has invalid characters.")
 	private String name;
 
 	@Column(name = "isActive")
+	@NotNull(message = "The curriculum active value has to be set.")
 	private Boolean isActive;
 
 	@Column(name = "isCore")
+	@NotNull(message = "The curriculum core value has to be set.")
 	private Boolean isCore;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "CURR_SKILLS")
+	@NotNull(message = "A curriculum must have skills.")
 	private Set<SkillIdHolder> skills;
 
 	public Curriculum() {

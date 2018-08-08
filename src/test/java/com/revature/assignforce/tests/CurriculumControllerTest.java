@@ -2,10 +2,7 @@ package com.revature.assignforce.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -108,7 +105,7 @@ public class CurriculumControllerTest {
 	}
 	
 	@Test
-	public void cddTestCreated() {
+	public void addTestCreated() {
 		SkillIdHolder s1 = new SkillIdHolder(1);
 		SkillIdHolder s2 = new SkillIdHolder(2);
 		SkillIdHolder s3 = new SkillIdHolder(3);
@@ -124,12 +121,35 @@ public class CurriculumControllerTest {
 		skillSet.add(s6);
 		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
 		Mockito.when(curriRepository.save(c1)).thenReturn(c1);
-		ResponseEntity<Curriculum> reTest = curriController.cdd(c1);
-		assertTrue(reTest.getBody().getId() == 12 &&  reTest.getStatusCode() == HttpStatus.CREATED);
+		ResponseEntity<Object> reTest = curriController.add(c1);
+		assertTrue(((Curriculum) reTest.getBody()).getId() == 12 &&  reTest.getStatusCode() == HttpStatus.CREATED);
 	}
-	
+
 	@Test
-	public void cddTestBadRequest() {
+	public void shouldReturnMessagesAndBadRequestOnInvalidCurriculum() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(12, "J@V@", false, true, skillSet);
+		Mockito.when(curriRepository.save(c1)).thenReturn(c1);
+		ResponseEntity<Object> reTest = curriController.add(c1);
+		assertTrue(((Set<String>) reTest.getBody()).contains("Curriculum name has invalid characters.") &&
+				reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
+	}
+
+	@Test
+	public void addTestBadRequest() {
 		SkillIdHolder s1 = new SkillIdHolder(1);
 		SkillIdHolder s2 = new SkillIdHolder(2);
 		SkillIdHolder s3 = new SkillIdHolder(3);
@@ -144,7 +164,7 @@ public class CurriculumControllerTest {
 		skillSet.add(s5);
 		skillSet.add(s6);
 		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
-		ResponseEntity<Curriculum> reTest = curriController.cdd(c1);
+		ResponseEntity<Object> reTest = curriController.add(null);
 		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
 	}
 	
@@ -166,8 +186,8 @@ public class CurriculumControllerTest {
 		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
 		c1.setIsCore(false);
 		Mockito.when(curriRepository.save(c1)).thenReturn(c1);
-		ResponseEntity<Curriculum> reTest = curriController.update(c1);
-		assertTrue(reTest.getBody().getIsCore() == false && reTest.getStatusCode() == HttpStatus.CREATED);
+		ResponseEntity<Object> reTest = curriController.update(c1);
+		assertTrue(!((Curriculum) reTest.getBody()).getIsCore() && reTest.getStatusCode() == HttpStatus.CREATED);
 	}
 	
 	@Test
@@ -186,7 +206,7 @@ public class CurriculumControllerTest {
 		skillSet.add(s5);
 		skillSet.add(s6);
 		Curriculum c1 = new Curriculum(12, "Schedule12", false, true, skillSet);
-		ResponseEntity<Curriculum> reTest = curriController.update(c1);
+		ResponseEntity<Object> reTest = curriController.update(null);
 		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
 	}
 	

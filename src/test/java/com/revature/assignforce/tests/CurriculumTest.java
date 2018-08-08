@@ -3,7 +3,9 @@ package com.revature.assignforce.tests;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -17,6 +19,11 @@ import com.revature.assignforce.beans.SkillIdHolder;
 import com.revature.assignforce.repos.CurriculumRepo;
 import com.revature.assignforce.service.CurriculumService;
 import com.revature.assignforce.service.CurriculumServiceImpl;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -103,4 +110,47 @@ public class CurriculumTest {
 		assertTrue(c1.getSkills().size() == 6);
 	}
 
+
+	@Test
+	public void testValidationShouldReturn4ViolationsOnNullAndEmptyValues() {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+		Curriculum curriculum = new Curriculum();
+		curriculum.setName("");
+		curriculum.setIsCore(null);
+		curriculum.setIsActive(null);
+		curriculum.setSkills(null);
+		Set<ConstraintViolation<Curriculum>> violations = validator.validate(curriculum);
+		Assert.assertEquals(4, violations.size());
+	}
+
+	@Test
+	public void validationShouldCatchIllegalCharacters() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+
+		Curriculum curriculum = new Curriculum();
+		curriculum.setName("J@v@");
+		curriculum.setIsActive(true);
+		curriculum.setIsCore(true);
+		curriculum.setSkills(skillSet);
+
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+
+		Set<ConstraintViolation<Curriculum>> violations = validator.validate(curriculum);
+		Assert.assertEquals(1, violations.size());
+	}
 }
