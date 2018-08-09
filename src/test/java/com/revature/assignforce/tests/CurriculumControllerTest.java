@@ -149,6 +149,29 @@ public class CurriculumControllerTest {
 	}
 
 	@Test
+	public void shouldReturnMessagesAndBadRequestOnInvalidCurriculumUpdate() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(12, "", false, true, skillSet);
+		Mockito.when(curriRepository.save(c1)).thenReturn(c1);
+		ResponseEntity<Object> reTest = curriController.update(c1);
+		assertTrue(((Set<String>) reTest.getBody()).contains("A curriculum must have a name.") &&
+				reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
+	}
+
+	@Test
 	public void addTestBadRequest() {
 		SkillIdHolder s1 = new SkillIdHolder(1);
 		SkillIdHolder s2 = new SkillIdHolder(2);
