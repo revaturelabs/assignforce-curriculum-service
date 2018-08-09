@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
+import com.revature.assignforce.command.FindSkillsCommand;
+import com.revature.assignforce.messaging.messenger.CurriculumMessenger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -28,6 +30,12 @@ public class CurriculumControllerTest {
 
 	@Configuration
 	static class CurriculumServiceTestConfiguration {
+		@Bean
+		public FindSkillsCommand findSkillsCommand() {return Mockito.mock(FindSkillsCommand.class); }
+
+		@Bean
+		public CurriculumMessenger curriculumMessenger() {return Mockito.mock(CurriculumMessenger.class); }
+
 		@Bean
 		public CurriculumService curriculumService() {
 			return new CurriculumServiceImpl();

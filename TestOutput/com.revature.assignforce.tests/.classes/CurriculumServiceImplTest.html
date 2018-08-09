@@ -61,7 +61,7 @@
     100%
   </span>
   <span class="absValue">
-    (3/ 3)
+    (5/ 5)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,15 +69,15 @@
     100%
   </span>
   <span class="absValue">
-    (3/ 3)
+    (5/ 5)
   </span>
 </td>
   </tr>
   <tr>
-    <td class="name">CurriculumServiceImplTest$CurriculumServiceTestConfiguration$$EnhancerBySpringCGLIB$$f216384c</td>
+    <td class="name">CurriculumServiceImplTest$CurriculumServiceTestConfiguration$$EnhancerBySpringCGLIB$$147e2794</td>
   </tr>
   <tr>
-    <td class="name">CurriculumServiceImplTest$CurriculumServiceTestConfiguration$$EnhancerBySpringCGLIB$$f216384c$$FastClassBySpringCGLIB$$e83166ae</td>
+    <td class="name">CurriculumServiceImplTest$CurriculumServiceTestConfiguration$$EnhancerBySpringCGLIB$$147e2794$$FastClassBySpringCGLIB$$dd327fba</td>
   </tr>
   <tr>
     <td class="name">CurriculumServiceImplTest$CurriculumServiceTestConfiguration$$FastClassBySpringCGLIB$$c94da290</td>
@@ -89,7 +89,7 @@
     100%
   </span>
   <span class="absValue">
-    (9/ 9)
+    (11/ 11)
   </span>
 </td>
 <td class="coverageStat">
@@ -97,7 +97,7 @@
     100%
   </span>
   <span class="absValue">
-    (89/ 89)
+    (91/ 91)
   </span>
 </td>
 </tr>
@@ -116,149 +116,155 @@
 <i>7</i>&nbsp;import java.util.List;
 <i>8</i>&nbsp;import java.util.Optional;
 <i>9</i>&nbsp;
-<i>10</i>&nbsp;import org.junit.Test;
-<i>11</i>&nbsp;import org.junit.runner.RunWith;
-<i>12</i>&nbsp;import org.mockito.Mockito;
-<i>13</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
-<i>14</i>&nbsp;import org.springframework.boot.test.context.SpringBootTest;
-<i>15</i>&nbsp;import org.springframework.context.annotation.Bean;
-<i>16</i>&nbsp;import org.springframework.context.annotation.Configuration;
-<i>17</i>&nbsp;import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-<i>18</i>&nbsp;
-<i>19</i>&nbsp;import com.revature.assignforce.beans.Curriculum;
-<i>20</i>&nbsp;import com.revature.assignforce.beans.SkillIdHolder;
-<i>21</i>&nbsp;import com.revature.assignforce.repos.CurriculumRepo;
-<i>22</i>&nbsp;import com.revature.assignforce.service.CurriculumService;
-<i>23</i>&nbsp;import com.revature.assignforce.service.CurriculumServiceImpl;
-<i>24</i>&nbsp;
-<i>25</i>&nbsp;@RunWith(SpringJUnit4ClassRunner.class)
-<i>26</i>&nbsp;@SpringBootTest
-<b class="fc"><i>27</i>&nbsp;public class CurriculumServiceImplTest {</b>
-<i>28</i>&nbsp;	
-<i>29</i>&nbsp;	@Configuration
-<b class="fc"><i>30</i>&nbsp;	static class CurriculumServiceTestConfiguration {</b>
-<i>31</i>&nbsp;		@Bean
-<i>32</i>&nbsp;		public CurriculumService curriculumService() {
-<b class="fc"><i>33</i>&nbsp;			return new CurriculumServiceImpl();</b>
-<i>34</i>&nbsp;		}
+<i>10</i>&nbsp;import com.revature.assignforce.command.FindSkillsCommand;
+<i>11</i>&nbsp;import com.revature.assignforce.messaging.messenger.CurriculumMessenger;
+<i>12</i>&nbsp;import org.junit.Test;
+<i>13</i>&nbsp;import org.junit.runner.RunWith;
+<i>14</i>&nbsp;import org.mockito.Mockito;
+<i>15</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>16</i>&nbsp;import org.springframework.boot.test.context.SpringBootTest;
+<i>17</i>&nbsp;import org.springframework.context.annotation.Bean;
+<i>18</i>&nbsp;import org.springframework.context.annotation.Configuration;
+<i>19</i>&nbsp;import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;import com.revature.assignforce.beans.Curriculum;
+<i>22</i>&nbsp;import com.revature.assignforce.beans.SkillIdHolder;
+<i>23</i>&nbsp;import com.revature.assignforce.repos.CurriculumRepo;
+<i>24</i>&nbsp;import com.revature.assignforce.service.CurriculumService;
+<i>25</i>&nbsp;import com.revature.assignforce.service.CurriculumServiceImpl;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;@RunWith(SpringJUnit4ClassRunner.class)
+<i>28</i>&nbsp;@SpringBootTest
+<b class="fc"><i>29</i>&nbsp;public class CurriculumServiceImplTest {</b>
+<i>30</i>&nbsp;	
+<i>31</i>&nbsp;	@Configuration
+<b class="fc"><i>32</i>&nbsp;	static class CurriculumServiceTestConfiguration {</b>
+<i>33</i>&nbsp;		@Bean
+<b class="fc"><i>34</i>&nbsp;		public FindSkillsCommand findSkillsCommand() {return Mockito.mock(FindSkillsCommand.class); }</b>
 <i>35</i>&nbsp;		@Bean
-<i>36</i>&nbsp;		public CurriculumRepo curriRepository() {
-<b class="fc"><i>37</i>&nbsp;			return Mockito.mock(CurriculumRepo.class);</b>
-<i>38</i>&nbsp;		}
-<i>39</i>&nbsp;	}
-<i>40</i>&nbsp;	
-<i>41</i>&nbsp;	@Autowired
-<i>42</i>&nbsp;	private CurriculumService curriService;
-<i>43</i>&nbsp;	@Autowired
-<i>44</i>&nbsp;	private CurriculumRepo curriRepository;
-<i>45</i>&nbsp;	
-<i>46</i>&nbsp;	@Test
-<i>47</i>&nbsp;	public void getAllTest() {
-<b class="fc"><i>48</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
-<b class="fc"><i>49</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
-<b class="fc"><i>50</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
-<b class="fc"><i>51</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
-<b class="fc"><i>52</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
-<b class="fc"><i>53</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
-<b class="fc"><i>54</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
-<b class="fc"><i>55</i>&nbsp;		skillSet.add(s1);</b>
-<b class="fc"><i>56</i>&nbsp;		skillSet.add(s2);</b>
-<b class="fc"><i>57</i>&nbsp;		skillSet.add(s3);</b>
-<b class="fc"><i>58</i>&nbsp;		skillSet.add(s4);</b>
-<b class="fc"><i>59</i>&nbsp;		skillSet.add(s5);</b>
-<b class="fc"><i>60</i>&nbsp;		skillSet.add(s6);</b>
-<b class="fc"><i>61</i>&nbsp;		Curriculum c1 = new Curriculum(1, &quot;Schedule1&quot;, true, true, skillSet);</b>
-<b class="fc"><i>62</i>&nbsp;		Curriculum c2 = new Curriculum(3, &quot;Schedule2&quot;, true, false, skillSet);</b>
-<b class="fc"><i>63</i>&nbsp;		Curriculum c3 = new Curriculum(5, &quot;Schedule3&quot;, false, true, skillSet);</b>
-<b class="fc"><i>64</i>&nbsp;		List&lt;Curriculum&gt; curriList = new ArrayList&lt;Curriculum&gt;();</b>
-<b class="fc"><i>65</i>&nbsp;		curriList.add(c1);</b>
-<b class="fc"><i>66</i>&nbsp;		curriList.add(c2);</b>
-<b class="fc"><i>67</i>&nbsp;		curriList.add(c3);</b>
-<b class="fc"><i>68</i>&nbsp;		Mockito.when(curriRepository.findAll()).thenReturn(curriList);</b>
-<b class="fc"><i>69</i>&nbsp;		List&lt;Curriculum&gt; testList = curriService.getAll();</b>
-<b class="fc"><i>70</i>&nbsp;		assertTrue(testList.size() == 3);</b>
-<b class="fc"><i>71</i>&nbsp;	}</b>
-<i>72</i>&nbsp;	
-<i>73</i>&nbsp;	@Test
-<i>74</i>&nbsp;	public void findByIdTest() {
-<b class="fc"><i>75</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
-<b class="fc"><i>76</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
-<b class="fc"><i>77</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
-<b class="fc"><i>78</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
-<b class="fc"><i>79</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
-<b class="fc"><i>80</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
-<b class="fc"><i>81</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
-<b class="fc"><i>82</i>&nbsp;		skillSet.add(s1);</b>
-<b class="fc"><i>83</i>&nbsp;		skillSet.add(s2);</b>
-<b class="fc"><i>84</i>&nbsp;		skillSet.add(s3);</b>
-<b class="fc"><i>85</i>&nbsp;		skillSet.add(s4);</b>
-<b class="fc"><i>86</i>&nbsp;		skillSet.add(s5);</b>
-<b class="fc"><i>87</i>&nbsp;		skillSet.add(s6);</b>
-<b class="fc"><i>88</i>&nbsp;		Curriculum c1 = new Curriculum(2, &quot;Schedule8&quot;, true, true, skillSet);</b>
-<b class="fc"><i>89</i>&nbsp;		Optional&lt;Curriculum&gt; op1 = Optional.ofNullable(c1);</b>
-<b class="fc"><i>90</i>&nbsp;		Mockito.when(curriRepository.findById(2)).thenReturn(op1);</b>
-<b class="fc"><i>91</i>&nbsp;		Optional&lt;Curriculum&gt; opTest = curriService.findById(2);</b>
-<b class="fc"><i>92</i>&nbsp;		assertTrue(opTest.get().getId() == 2);</b>
-<b class="fc"><i>93</i>&nbsp;	}</b>
-<i>94</i>&nbsp;	
-<i>95</i>&nbsp;	@Test
-<i>96</i>&nbsp;	public void createTest() {
-<b class="fc"><i>97</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
-<b class="fc"><i>98</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
-<b class="fc"><i>99</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
-<b class="fc"><i>100</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
-<b class="fc"><i>101</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
-<b class="fc"><i>102</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
-<b class="fc"><i>103</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
-<b class="fc"><i>104</i>&nbsp;		skillSet.add(s1);</b>
-<b class="fc"><i>105</i>&nbsp;		skillSet.add(s2);</b>
-<b class="fc"><i>106</i>&nbsp;		skillSet.add(s3);</b>
-<b class="fc"><i>107</i>&nbsp;		skillSet.add(s4);</b>
-<b class="fc"><i>108</i>&nbsp;		skillSet.add(s5);</b>
-<b class="fc"><i>109</i>&nbsp;		skillSet.add(s6);</b>
-<b class="fc"><i>110</i>&nbsp;		Curriculum c1 = new Curriculum(5, &quot;Schedule5&quot;, false, false, skillSet);</b>
-<b class="fc"><i>111</i>&nbsp;		Mockito.when(curriRepository.save(c1)).thenReturn(c1);</b>
-<b class="fc"><i>112</i>&nbsp;		Curriculum cTest = curriService.create(c1);</b>
-<b class="fc"><i>113</i>&nbsp;		assertTrue(cTest.getId() == 5);</b>
-<b class="fc"><i>114</i>&nbsp;	}</b>
-<i>115</i>&nbsp;	
-<i>116</i>&nbsp;	@Test
-<i>117</i>&nbsp;	public void updateTest() {
-<b class="fc"><i>118</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
-<b class="fc"><i>119</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
-<b class="fc"><i>120</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
-<b class="fc"><i>121</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
-<b class="fc"><i>122</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
-<b class="fc"><i>123</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
-<b class="fc"><i>124</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
-<b class="fc"><i>125</i>&nbsp;		skillSet.add(s1);</b>
-<b class="fc"><i>126</i>&nbsp;		skillSet.add(s2);</b>
-<b class="fc"><i>127</i>&nbsp;		skillSet.add(s3);</b>
-<b class="fc"><i>128</i>&nbsp;		skillSet.add(s4);</b>
-<b class="fc"><i>129</i>&nbsp;		skillSet.add(s5);</b>
-<b class="fc"><i>130</i>&nbsp;		skillSet.add(s6);</b>
-<b class="fc"><i>131</i>&nbsp;		Curriculum c1 = new Curriculum(5, &quot;Schedule5&quot;, false, false, skillSet);</b>
-<b class="fc"><i>132</i>&nbsp;		c1.setName(&quot;Schedule500&quot;);</b>
-<b class="fc"><i>133</i>&nbsp;		Mockito.when(curriRepository.save(c1)).thenReturn(c1);</b>
-<b class="fc"><i>134</i>&nbsp;		Curriculum cTest = curriService.update(c1);</b>
-<b class="fc"><i>135</i>&nbsp;		assertTrue(cTest.getName().equals(&quot;Schedule500&quot;));</b>
-<b class="fc"><i>136</i>&nbsp;	}</b>
-<i>137</i>&nbsp;	
-<i>138</i>&nbsp;	@Test
-<i>139</i>&nbsp;	public void deleteTest() {
-<b class="fc"><i>140</i>&nbsp;		Mockito.doNothing().when(curriRepository).deleteById(6);</b>
-<b class="fc"><i>141</i>&nbsp;		curriService.delete(6);</b>
-<b class="fc"><i>142</i>&nbsp;		Optional&lt;Curriculum&gt; opTest = curriService.findById(6);</b>
-<b class="fc"><i>143</i>&nbsp;		assertFalse(opTest.isPresent());</b>
-<b class="fc"><i>144</i>&nbsp;	}</b>
-<i>145</i>&nbsp;
-<i>146</i>&nbsp;}
+<b class="fc"><i>36</i>&nbsp;		public CurriculumMessenger curriculumMessenger() {return Mockito.mock(CurriculumMessenger.class); }</b>
+<i>37</i>&nbsp;		@Bean
+<i>38</i>&nbsp;		public CurriculumService curriculumService() {
+<b class="fc"><i>39</i>&nbsp;			return new CurriculumServiceImpl();</b>
+<i>40</i>&nbsp;		}
+<i>41</i>&nbsp;		@Bean
+<i>42</i>&nbsp;		public CurriculumRepo curriRepository() {
+<b class="fc"><i>43</i>&nbsp;			return Mockito.mock(CurriculumRepo.class);</b>
+<i>44</i>&nbsp;		}
+<i>45</i>&nbsp;	}
+<i>46</i>&nbsp;	
+<i>47</i>&nbsp;	@Autowired
+<i>48</i>&nbsp;	private CurriculumService curriService;
+<i>49</i>&nbsp;	@Autowired
+<i>50</i>&nbsp;	private CurriculumRepo curriRepository;
+<i>51</i>&nbsp;	
+<i>52</i>&nbsp;	@Test
+<i>53</i>&nbsp;	public void getAllTest() {
+<b class="fc"><i>54</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>55</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>56</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>57</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>58</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>59</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<b class="fc"><i>60</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>61</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>62</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>63</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>64</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>65</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>66</i>&nbsp;		skillSet.add(s6);</b>
+<b class="fc"><i>67</i>&nbsp;		Curriculum c1 = new Curriculum(1, &quot;Schedule1&quot;, true, true, skillSet);</b>
+<b class="fc"><i>68</i>&nbsp;		Curriculum c2 = new Curriculum(3, &quot;Schedule2&quot;, true, false, skillSet);</b>
+<b class="fc"><i>69</i>&nbsp;		Curriculum c3 = new Curriculum(5, &quot;Schedule3&quot;, false, true, skillSet);</b>
+<b class="fc"><i>70</i>&nbsp;		List&lt;Curriculum&gt; curriList = new ArrayList&lt;Curriculum&gt;();</b>
+<b class="fc"><i>71</i>&nbsp;		curriList.add(c1);</b>
+<b class="fc"><i>72</i>&nbsp;		curriList.add(c2);</b>
+<b class="fc"><i>73</i>&nbsp;		curriList.add(c3);</b>
+<b class="fc"><i>74</i>&nbsp;		Mockito.when(curriRepository.findAll()).thenReturn(curriList);</b>
+<b class="fc"><i>75</i>&nbsp;		List&lt;Curriculum&gt; testList = curriService.getAll();</b>
+<b class="fc"><i>76</i>&nbsp;		assertTrue(testList.size() == 3);</b>
+<b class="fc"><i>77</i>&nbsp;	}</b>
+<i>78</i>&nbsp;	
+<i>79</i>&nbsp;	@Test
+<i>80</i>&nbsp;	public void findByIdTest() {
+<b class="fc"><i>81</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>82</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>83</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>84</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>85</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>86</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<b class="fc"><i>87</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>88</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>89</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>90</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>91</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>92</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>93</i>&nbsp;		skillSet.add(s6);</b>
+<b class="fc"><i>94</i>&nbsp;		Curriculum c1 = new Curriculum(2, &quot;Schedule8&quot;, true, true, skillSet);</b>
+<b class="fc"><i>95</i>&nbsp;		Optional&lt;Curriculum&gt; op1 = Optional.ofNullable(c1);</b>
+<b class="fc"><i>96</i>&nbsp;		Mockito.when(curriRepository.findById(2)).thenReturn(op1);</b>
+<b class="fc"><i>97</i>&nbsp;		Optional&lt;Curriculum&gt; opTest = curriService.findById(2);</b>
+<b class="fc"><i>98</i>&nbsp;		assertTrue(opTest.get().getId() == 2);</b>
+<b class="fc"><i>99</i>&nbsp;	}</b>
+<i>100</i>&nbsp;	
+<i>101</i>&nbsp;	@Test
+<i>102</i>&nbsp;	public void createTest() {
+<b class="fc"><i>103</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>104</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>105</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>106</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>107</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>108</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<b class="fc"><i>109</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>110</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>111</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>112</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>113</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>114</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>115</i>&nbsp;		skillSet.add(s6);</b>
+<b class="fc"><i>116</i>&nbsp;		Curriculum c1 = new Curriculum(5, &quot;Schedule5&quot;, false, false, skillSet);</b>
+<b class="fc"><i>117</i>&nbsp;		Mockito.when(curriRepository.save(c1)).thenReturn(c1);</b>
+<b class="fc"><i>118</i>&nbsp;		Curriculum cTest = curriService.create(c1);</b>
+<b class="fc"><i>119</i>&nbsp;		assertTrue(cTest.getId() == 5);</b>
+<b class="fc"><i>120</i>&nbsp;	}</b>
+<i>121</i>&nbsp;	
+<i>122</i>&nbsp;	@Test
+<i>123</i>&nbsp;	public void updateTest() {
+<b class="fc"><i>124</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>125</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>126</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>127</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>128</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>129</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<b class="fc"><i>130</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>131</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>132</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>133</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>134</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>135</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>136</i>&nbsp;		skillSet.add(s6);</b>
+<b class="fc"><i>137</i>&nbsp;		Curriculum c1 = new Curriculum(5, &quot;Schedule5&quot;, false, false, skillSet);</b>
+<b class="fc"><i>138</i>&nbsp;		c1.setName(&quot;Schedule500&quot;);</b>
+<b class="fc"><i>139</i>&nbsp;		Mockito.when(curriRepository.save(c1)).thenReturn(c1);</b>
+<b class="fc"><i>140</i>&nbsp;		Curriculum cTest = curriService.update(c1);</b>
+<b class="fc"><i>141</i>&nbsp;		assertTrue(cTest.getName().equals(&quot;Schedule500&quot;));</b>
+<b class="fc"><i>142</i>&nbsp;	}</b>
+<i>143</i>&nbsp;	
+<i>144</i>&nbsp;	@Test
+<i>145</i>&nbsp;	public void deleteTest() {
+<b class="fc"><i>146</i>&nbsp;		Mockito.doNothing().when(curriRepository).deleteById(6);</b>
+<b class="fc"><i>147</i>&nbsp;		curriService.delete(6);</b>
+<b class="fc"><i>148</i>&nbsp;		Optional&lt;Curriculum&gt; opTest = curriService.findById(6);</b>
+<b class="fc"><i>149</i>&nbsp;		assertFalse(opTest.isPresent());</b>
+<b class="fc"><i>150</i>&nbsp;	}</b>
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2018-08-08 14:10</div>
+    <div style="float:right;">generated on 2018-08-09 16:05</div>
 </div>
 </body>
 </html>

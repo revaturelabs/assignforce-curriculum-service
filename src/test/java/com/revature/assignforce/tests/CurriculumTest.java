@@ -112,7 +112,7 @@ public class CurriculumTest {
 
 
 	@Test
-	public void testValidationShouldReturn4ViolationsOnNullAndEmptyValues() {
+	public void testValidationShouldReturn5ViolationsOnNullAndEmptyValues() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		Validator validator = factory.getValidator();
 		Curriculum curriculum = new Curriculum();
@@ -121,7 +121,7 @@ public class CurriculumTest {
 		curriculum.setIsActive(null);
 		curriculum.setSkills(null);
 		Set<ConstraintViolation<Curriculum>> violations = validator.validate(curriculum);
-		Assert.assertEquals(4, violations.size());
+		Assert.assertEquals(5, violations.size());
 	}
 
 	@Test
@@ -152,5 +152,20 @@ public class CurriculumTest {
 
 		Set<ConstraintViolation<Curriculum>> violations = validator.validate(curriculum);
 		Assert.assertEquals(1, violations.size());
+	}
+
+	@Test
+	public void CurriculumEmptyString() {
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+		Curriculum curriculum = new Curriculum();
+		curriculum.setName("");
+
+		Set<String> messages = new HashSet<>();
+		Set<ConstraintViolation<Curriculum>> violations = validator.validate(curriculum);
+		for (ConstraintViolation<Curriculum> violation : violations) {
+			messages.add(violation.getMessage());
+		}
+		Assert.assertTrue(messages.contains("The name has to be between 1 and 128 characters in length."));
+		Assert.assertTrue(messages.contains("A curriculum must have a name."));
 	}
 }

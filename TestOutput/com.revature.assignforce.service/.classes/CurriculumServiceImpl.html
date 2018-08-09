@@ -50,18 +50,18 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    85.7%
   </span>
   <span class="absValue">
-    (6/ 6)
+    (6/ 7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    80%
   </span>
   <span class="absValue">
-    (7/ 7)
+    (8/ 10)
   </span>
 </td>
 </tr>
@@ -76,58 +76,80 @@
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import java.util.List;
 <i>4</i>&nbsp;import java.util.Optional;
-<i>5</i>&nbsp;
-<i>6</i>&nbsp;import javax.transaction.Transactional;
-<i>7</i>&nbsp;
-<i>8</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
-<i>9</i>&nbsp;import org.springframework.stereotype.Service;
-<i>10</i>&nbsp;
-<i>11</i>&nbsp;import com.revature.assignforce.beans.Curriculum;
-<i>12</i>&nbsp;import com.revature.assignforce.repos.CurriculumRepo;
-<i>13</i>&nbsp;
-<i>14</i>&nbsp;@Service
-<i>15</i>&nbsp;@Transactional
-<b class="fc"><i>16</i>&nbsp;public class CurriculumServiceImpl implements CurriculumService {</b>
-<i>17</i>&nbsp;	
-<i>18</i>&nbsp;	@Autowired
-<i>19</i>&nbsp;	private CurriculumRepo currRepo;
-<i>20</i>&nbsp;	
-<i>21</i>&nbsp;	@Override
-<i>22</i>&nbsp;	public List&lt;Curriculum&gt; getAll() {
-<i>23</i>&nbsp;		
-<b class="fc"><i>24</i>&nbsp;		return currRepo.findAll();</b>
-<i>25</i>&nbsp;	}
-<i>26</i>&nbsp;
-<i>27</i>&nbsp;	@Override
-<i>28</i>&nbsp;	public Optional&lt;Curriculum&gt; findById(int id) {
-<b class="fc"><i>29</i>&nbsp;		return currRepo.findById(id);</b>
-<i>30</i>&nbsp;	}
-<i>31</i>&nbsp;
-<i>32</i>&nbsp;	@Override
-<i>33</i>&nbsp;	public Curriculum create(Curriculum obj) {
-<i>34</i>&nbsp;		
-<b class="fc"><i>35</i>&nbsp;		return currRepo.save(obj);</b>
-<i>36</i>&nbsp;	}
-<i>37</i>&nbsp;
-<i>38</i>&nbsp;	@Override
-<i>39</i>&nbsp;	public Curriculum update(Curriculum obj) {
-<i>40</i>&nbsp;		
-<b class="fc"><i>41</i>&nbsp;		return currRepo.save(obj);</b>
-<i>42</i>&nbsp;	}
-<i>43</i>&nbsp;
-<i>44</i>&nbsp;	@Override
-<i>45</i>&nbsp;	public void delete(int id) {
-<b class="fc"><i>46</i>&nbsp;		currRepo.deleteById(id);</b>
-<i>47</i>&nbsp;		
-<b class="fc"><i>48</i>&nbsp;	}</b>
-<i>49</i>&nbsp;
-<i>50</i>&nbsp;}
+<i>5</i>&nbsp;import java.util.stream.Collectors;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import javax.transaction.Transactional;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>10</i>&nbsp;import org.springframework.beans.factory.annotation.Qualifier;
+<i>11</i>&nbsp;import org.springframework.stereotype.Service;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import com.revature.assignforce.beans.Curriculum;
+<i>14</i>&nbsp;import com.revature.assignforce.messaging.messenger.CurriculumMessenger;
+<i>15</i>&nbsp;import com.revature.assignforce.repos.CurriculumRepo;
+<i>16</i>&nbsp;import com.revature.assignforce.command.FindSkillsCommand;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;@Service
+<i>19</i>&nbsp;@Transactional
+<b class="fc"><i>20</i>&nbsp;public class CurriculumServiceImpl implements CurriculumService {</b>
+<i>21</i>&nbsp;	
+<i>22</i>&nbsp;	@Autowired
+<i>23</i>&nbsp;	private CurriculumRepo currRepo;
+<i>24</i>&nbsp;	
+<i>25</i>&nbsp;	@Autowired
+<i>26</i>&nbsp;	private CurriculumMessenger currMessenger;
+<i>27</i>&nbsp;	
+<i>28</i>&nbsp;	@Autowired
+<i>29</i>&nbsp;	private FindSkillsCommand findSkills;
+<i>30</i>&nbsp;	
+<i>31</i>&nbsp;	@Override
+<i>32</i>&nbsp;	public List&lt;Curriculum&gt; getAll() {
+<i>33</i>&nbsp;		
+<b class="fc"><i>34</i>&nbsp;		return currRepo.findAll();</b>
+<i>35</i>&nbsp;	}
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	@Override
+<i>38</i>&nbsp;	public Optional&lt;Curriculum&gt; findById(int id) {
+<b class="fc"><i>39</i>&nbsp;		return currRepo.findById(id);</b>
+<i>40</i>&nbsp;	}
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;	@Override
+<i>43</i>&nbsp;	public Curriculum create(Curriculum obj) {
+<i>44</i>&nbsp;		
+<b class="fc"><i>45</i>&nbsp;		return currRepo.save(obj);</b>
+<i>46</i>&nbsp;	}
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;	@Override
+<i>49</i>&nbsp;	public Curriculum update(Curriculum obj) {
+<i>50</i>&nbsp;		
+<b class="fc"><i>51</i>&nbsp;		return currRepo.save(obj);</b>
+<i>52</i>&nbsp;	}
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;	@Override
+<i>55</i>&nbsp;	public void delete(int id) {
+<b class="fc"><i>56</i>&nbsp;		currMessenger.sendDeletionMessage(id);</b>
+<b class="fc"><i>57</i>&nbsp;		currRepo.deleteById(id);</b>
+<i>58</i>&nbsp;		
+<b class="fc"><i>59</i>&nbsp;	}</b>
+<i>60</i>&nbsp;	
+<i>61</i>&nbsp;	/**
+<i>62</i>&nbsp;	 * Checks for referential integrity. The method will first call FindSkill
+<i>63</i>&nbsp;	 * Command and check if the skill exists.
+<i>64</i>&nbsp;	 * @param obj  to be checked
+<i>65</i>&nbsp;	 * @return obj after all, if any, changes are made
+<i>66</i>&nbsp;	 */
+<i>67</i>&nbsp;	private Curriculum validateReferences(Curriculum obj) {
+<b class="nc"><i>68</i>&nbsp;		obj.setSkills(obj.getSkills().stream().filter((skillIdHolder) -&gt; findSkills.findSkill(skillIdHolder)).collect(Collectors.toSet()));</b>
+<b class="nc"><i>69</i>&nbsp;		return obj;</b>
+<i>70</i>&nbsp;}
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2018-08-08 14:12</div>
+    <div style="float:right;">generated on 2018-08-09 16:41</div>
 </div>
 </body>
 </html>
