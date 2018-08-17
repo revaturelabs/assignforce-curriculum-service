@@ -26,7 +26,6 @@ import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import javax.xml.validation.Validator;
 
-@CrossOrigin
 @RestController
 public class CurriculumController {
 

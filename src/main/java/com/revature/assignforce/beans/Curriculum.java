@@ -46,7 +46,7 @@ public class Curriculum {
 	@NotNull(message = "The curriculum core value has to be set.")
 	private Boolean isCore;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "CURR_SKILLS")
 	@NotNull(message = "A curriculum must have skills.")
 	private Set<SkillIdHolder> skills;
