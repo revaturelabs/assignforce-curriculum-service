@@ -8,18 +8,19 @@ pipeline {
     }
 
     stages {
-        stage('Build Context') {
+        stage('Build Context'){
             steps {
                 script {
                     debug = sh(script: "git log -1 | grep -c '\\[debug\\]'", returnStatus: true)
                     if(debug == 0) {
-                        env.DEBUG_BLD=1
+                        env.DEBUG_BLD = 1;
                     }
 
                     sh '/opt/login.sh'
                 }
             }
         }
+
         stage('Quality Check') {
             parallel {
                 stage('Unit Tests') {
@@ -157,7 +158,6 @@ pipeline {
                         sh "cf push -o ${env.IMG} --docker-username ${env.DK_U} --no-start -d ${env.DOMAIN}"
                         sh "cf set-env ${env.APP_NAME} SPRING_PROFILES_ACTIVE ${env.PROFILE}"
                         sh "cf start ${env.APP_NAME}"
-                        sh "cf logout"
                     } catch(Exception e) {
                         env.FAIL_STG="PCF Deploy"
                         currentBuild.result='FAILURE'
@@ -174,6 +174,11 @@ pipeline {
         }
     }
     post {
+        always {
+            script {
+                sh 'cf logout'
+            }
+        }
         success {
             script {
                 slackSend color: "good", message: "Build Succeeded: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
