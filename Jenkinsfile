@@ -16,7 +16,7 @@ pipeline {
                         env.DEBUG_BLD=1
                     }
 
-                    sh '/opt/login/sh'
+                    sh '/opt/login.sh'
                 }
             }
         }
