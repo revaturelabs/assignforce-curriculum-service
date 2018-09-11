@@ -1,0 +1,289 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CurriculumTest</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.revature.assignforce.tests</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CurriculumTest (com.revature.assignforce.tests)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CurriculumTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (97/ 97)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CurriculumTest$CurriculumTestConfiguration</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CurriculumTest$CurriculumTestConfiguration$$EnhancerBySpringCGLIB$$eb51b44</td>
+  </tr>
+  <tr>
+    <td class="name">CurriculumTest$CurriculumTestConfiguration$$EnhancerBySpringCGLIB$$eb51b44$$FastClassBySpringCGLIB$$e643bcb0</td>
+  </tr>
+  <tr>
+    <td class="name">CurriculumTest$CurriculumTestConfiguration$$FastClassBySpringCGLIB$$abc7d040</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (99/ 99)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.revature.assignforce.tests;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import static org.junit.Assert.*;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.HashSet;
+<i>6</i>&nbsp;import java.util.Set;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import org.junit.Assert;
+<i>9</i>&nbsp;import org.junit.Test;
+<i>10</i>&nbsp;import org.junit.runner.RunWith;
+<i>11</i>&nbsp;import org.mockito.Mockito;
+<i>12</i>&nbsp;import org.springframework.boot.test.context.SpringBootTest;
+<i>13</i>&nbsp;import org.springframework.context.annotation.Bean;
+<i>14</i>&nbsp;import org.springframework.context.annotation.Configuration;
+<i>15</i>&nbsp;import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import com.revature.assignforce.beans.Curriculum;
+<i>18</i>&nbsp;import com.revature.assignforce.beans.SkillIdHolder;
+<i>19</i>&nbsp;import com.revature.assignforce.repos.CurriculumRepo;
+<i>20</i>&nbsp;import com.revature.assignforce.service.CurriculumService;
+<i>21</i>&nbsp;import com.revature.assignforce.service.CurriculumServiceImpl;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import javax.validation.ConstraintViolation;
+<i>24</i>&nbsp;import javax.validation.Validation;
+<i>25</i>&nbsp;import javax.validation.Validator;
+<i>26</i>&nbsp;import javax.validation.ValidatorFactory;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;@RunWith(SpringJUnit4ClassRunner.class)
+<i>29</i>&nbsp;@SpringBootTest
+<b class="fc"><i>30</i>&nbsp;public class CurriculumTest {</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;	@Configuration
+<b class="fc"><i>33</i>&nbsp;	static class CurriculumTestConfiguration {</b>
+<i>34</i>&nbsp;		@Bean
+<i>35</i>&nbsp;		public Curriculum Curriculum() {
+<b class="fc"><i>36</i>&nbsp;			return new Curriculum();</b>
+<i>37</i>&nbsp;		}
+<i>38</i>&nbsp;	}
+<i>39</i>&nbsp;	
+<i>40</i>&nbsp;	@Test
+<i>41</i>&nbsp;	public void curriculumTest1() {
+<b class="fc"><i>42</i>&nbsp;		Curriculum c1 = new Curriculum();</b>
+<b class="fc"><i>43</i>&nbsp;		assertNotNull(c1);</b>
+<b class="fc"><i>44</i>&nbsp;	}</b>
+<i>45</i>&nbsp;	
+<i>46</i>&nbsp;	@Test
+<i>47</i>&nbsp;	public void curriculumTest2() {
+<b class="fc"><i>48</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>49</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>50</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>51</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>52</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>53</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<b class="fc"><i>54</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>55</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>56</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>57</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>58</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>59</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>60</i>&nbsp;		skillSet.add(s6);</b>
+<b class="fc"><i>61</i>&nbsp;		Curriculum c1 = new Curriculum(1, &quot;Schedule1&quot;, true, true, skillSet);</b>
+<b class="fc"><i>62</i>&nbsp;		assertTrue(c1.getId() == 1);</b>
+<b class="fc"><i>63</i>&nbsp;	}</b>
+<i>64</i>&nbsp;	
+<i>65</i>&nbsp;	@Test
+<i>66</i>&nbsp;	public void getSetIdTest() {
+<b class="fc"><i>67</i>&nbsp;		Curriculum c1 = new Curriculum();</b>
+<b class="fc"><i>68</i>&nbsp;		c1.setId(12);</b>
+<b class="fc"><i>69</i>&nbsp;		assertTrue(c1.getId() == 12);</b>
+<b class="fc"><i>70</i>&nbsp;	}</b>
+<i>71</i>&nbsp;	
+<i>72</i>&nbsp;	@Test
+<i>73</i>&nbsp;	public void getSetNameTest() {
+<b class="fc"><i>74</i>&nbsp;		Curriculum c1 = new Curriculum();</b>
+<b class="fc"><i>75</i>&nbsp;		c1.setName(&quot;ScheduleA&quot;);</b>
+<b class="fc"><i>76</i>&nbsp;		assertTrue(c1.getName().equals(&quot;ScheduleA&quot;));</b>
+<b class="fc"><i>77</i>&nbsp;	}</b>
+<i>78</i>&nbsp;	
+<i>79</i>&nbsp;	@Test
+<i>80</i>&nbsp;	public void getSetIsActiveTest() {
+<b class="fc"><i>81</i>&nbsp;		Curriculum c1 = new Curriculum();</b>
+<b class="fc"><i>82</i>&nbsp;		c1.setIsActive(true);</b>
+<b class="fc"><i>83</i>&nbsp;		assertTrue(c1.getIsActive());</b>
+<b class="fc"><i>84</i>&nbsp;	}</b>
+<i>85</i>&nbsp;	
+<i>86</i>&nbsp;	@Test
+<i>87</i>&nbsp;	public void getSetIsCoreTest() {
+<b class="fc"><i>88</i>&nbsp;		Curriculum c1 = new Curriculum();</b>
+<b class="fc"><i>89</i>&nbsp;		c1.setIsCore(true);</b>
+<b class="fc"><i>90</i>&nbsp;		assertTrue(c1.getIsCore());</b>
+<b class="fc"><i>91</i>&nbsp;	}</b>
+<i>92</i>&nbsp;	
+<i>93</i>&nbsp;	@Test
+<i>94</i>&nbsp;	public void getSetSkills() {
+<b class="fc"><i>95</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>96</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>97</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>98</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>99</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>100</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<b class="fc"><i>101</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>102</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>103</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>104</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>105</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>106</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>107</i>&nbsp;		skillSet.add(s6);</b>
+<b class="fc"><i>108</i>&nbsp;		Curriculum c1 = new Curriculum();</b>
+<b class="fc"><i>109</i>&nbsp;		c1.setSkills(skillSet);</b>
+<b class="fc"><i>110</i>&nbsp;		assertTrue(c1.getSkills().size() == 6);</b>
+<b class="fc"><i>111</i>&nbsp;	}</b>
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;	@Test
+<i>115</i>&nbsp;	public void testValidationShouldReturn5ViolationsOnNullAndEmptyValues() {
+<b class="fc"><i>116</i>&nbsp;		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();</b>
+<b class="fc"><i>117</i>&nbsp;		Validator validator = factory.getValidator();</b>
+<b class="fc"><i>118</i>&nbsp;		Curriculum curriculum = new Curriculum();</b>
+<b class="fc"><i>119</i>&nbsp;		curriculum.setName(&quot;&quot;);</b>
+<b class="fc"><i>120</i>&nbsp;		curriculum.setIsCore(null);</b>
+<b class="fc"><i>121</i>&nbsp;		curriculum.setIsActive(null);</b>
+<b class="fc"><i>122</i>&nbsp;		curriculum.setSkills(null);</b>
+<b class="fc"><i>123</i>&nbsp;		Set&lt;ConstraintViolation&lt;Curriculum&gt;&gt; violations = validator.validate(curriculum);</b>
+<b class="fc"><i>124</i>&nbsp;		Assert.assertEquals(5, violations.size());</b>
+<b class="fc"><i>125</i>&nbsp;	}</b>
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;	@Test
+<i>128</i>&nbsp;	public void validationShouldCatchIllegalCharacters() {
+<b class="fc"><i>129</i>&nbsp;		SkillIdHolder s1 = new SkillIdHolder(1);</b>
+<b class="fc"><i>130</i>&nbsp;		SkillIdHolder s2 = new SkillIdHolder(2);</b>
+<b class="fc"><i>131</i>&nbsp;		SkillIdHolder s3 = new SkillIdHolder(3);</b>
+<b class="fc"><i>132</i>&nbsp;		SkillIdHolder s4 = new SkillIdHolder(4);</b>
+<b class="fc"><i>133</i>&nbsp;		SkillIdHolder s5 = new SkillIdHolder(5);</b>
+<b class="fc"><i>134</i>&nbsp;		SkillIdHolder s6 = new SkillIdHolder(6);</b>
+<i>135</i>&nbsp;
+<b class="fc"><i>136</i>&nbsp;		HashSet&lt;SkillIdHolder&gt; skillSet = new HashSet&lt;SkillIdHolder&gt;();</b>
+<b class="fc"><i>137</i>&nbsp;		skillSet.add(s1);</b>
+<b class="fc"><i>138</i>&nbsp;		skillSet.add(s2);</b>
+<b class="fc"><i>139</i>&nbsp;		skillSet.add(s3);</b>
+<b class="fc"><i>140</i>&nbsp;		skillSet.add(s4);</b>
+<b class="fc"><i>141</i>&nbsp;		skillSet.add(s5);</b>
+<b class="fc"><i>142</i>&nbsp;		skillSet.add(s6);</b>
+<i>143</i>&nbsp;
+<b class="fc"><i>144</i>&nbsp;		Curriculum curriculum = new Curriculum();</b>
+<b class="fc"><i>145</i>&nbsp;		curriculum.setName(&quot;J@v@&quot;);</b>
+<b class="fc"><i>146</i>&nbsp;		curriculum.setIsActive(true);</b>
+<b class="fc"><i>147</i>&nbsp;		curriculum.setIsCore(true);</b>
+<b class="fc"><i>148</i>&nbsp;		curriculum.setSkills(skillSet);</b>
+<i>149</i>&nbsp;
+<b class="fc"><i>150</i>&nbsp;		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();</b>
+<b class="fc"><i>151</i>&nbsp;		Validator validator = factory.getValidator();</b>
+<i>152</i>&nbsp;
+<b class="fc"><i>153</i>&nbsp;		Set&lt;ConstraintViolation&lt;Curriculum&gt;&gt; violations = validator.validate(curriculum);</b>
+<b class="fc"><i>154</i>&nbsp;		Assert.assertEquals(1, violations.size());</b>
+<b class="fc"><i>155</i>&nbsp;	}</b>
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;	@Test
+<i>158</i>&nbsp;	public void CurriculumEmptyString() {
+<b class="fc"><i>159</i>&nbsp;		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();</b>
+<b class="fc"><i>160</i>&nbsp;		Curriculum curriculum = new Curriculum();</b>
+<b class="fc"><i>161</i>&nbsp;		curriculum.setName(&quot;&quot;);</b>
+<i>162</i>&nbsp;
+<b class="fc"><i>163</i>&nbsp;		Set&lt;String&gt; messages = new HashSet&lt;&gt;();</b>
+<b class="fc"><i>164</i>&nbsp;		Set&lt;ConstraintViolation&lt;Curriculum&gt;&gt; violations = validator.validate(curriculum);</b>
+<b class="fc"><i>165</i>&nbsp;		for (ConstraintViolation&lt;Curriculum&gt; violation : violations) {</b>
+<b class="fc"><i>166</i>&nbsp;			messages.add(violation.getMessage());</b>
+<b class="fc"><i>167</i>&nbsp;		}</b>
+<b class="fc"><i>168</i>&nbsp;		Assert.assertTrue(messages.contains(&quot;The name has to be between 1 and 128 characters in length.&quot;));</b>
+<b class="fc"><i>169</i>&nbsp;		Assert.assertTrue(messages.contains(&quot;A curriculum must have a name.&quot;));</b>
+<b class="fc"><i>170</i>&nbsp;	}</b>
+<i>171</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-08-09 16:05</div>
+</div>
+</body>
+</html>
