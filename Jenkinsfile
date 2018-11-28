@@ -3,7 +3,7 @@ pipeline {
     environment {
         APP_NAME="curriculum-service"
         IMG_NAME="af-curriculum"
-        CF_ORG="Revature Training"
+        CF_ORG="'Revature Training'"
         PROD_DOM="revaturecf.com"
         DEV_DOM="cfapps.io"
     }
