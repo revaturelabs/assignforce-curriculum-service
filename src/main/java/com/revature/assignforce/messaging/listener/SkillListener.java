@@ -15,9 +15,11 @@ import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class SkillListener {
     Logger logger = LoggerFactory.getLogger(SkillListener.class);
 
