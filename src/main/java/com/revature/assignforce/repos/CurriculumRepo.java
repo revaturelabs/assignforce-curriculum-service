@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.assignforce.beans.Curriculum;
 
 @Repository
-public interface CurriculumRepo extends JpaRepository<Curriculum, Integer>{
+public interface CurriculumRepo extends JpaRepository<Curriculum, Integer> {
 
 }
