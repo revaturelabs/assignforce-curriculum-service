@@ -23,4 +23,9 @@ public class SkillMessage {
     public SkillMessage() {
 
     }
+
+    public SkillMessage(String context, int skillId) {
+        this.context = context;
+        this.skillId = skillId;
+    }
 }
