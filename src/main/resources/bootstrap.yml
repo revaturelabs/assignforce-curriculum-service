@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILES:default}
+  cloud:
+    config:
+      uri: ${CONFIG_URL}
+  application:
+    name: location-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
