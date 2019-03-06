@@ -20,7 +20,7 @@ import com.revature.assignforce.command.FindSkillsCommand;
 public class CurriculumServiceImpl implements CurriculumService {
 	
 	@Autowired
-	private CurriculumRepo currRepo;
+	private CurriculumRepo curriculumRepo;
 	
 	@Autowired
 	private CurriculumMessenger currMessenger;
@@ -31,30 +31,30 @@ public class CurriculumServiceImpl implements CurriculumService {
 	@Override
 	public List<Curriculum> getAll() {
 		
-		return currRepo.findAll();
+		return curriculumRepo.findAll();
 	}
 
 	@Override
 	public Optional<Curriculum> findById(int id) {
-		return currRepo.findById(id);
+		return curriculumRepo.findById(id);
 	}
 
 	@Override
 	public Curriculum create(Curriculum obj) {
 		
-		return currRepo.save(obj);
+		return curriculumRepo.save(obj);
 	}
 
 	@Override
 	public Curriculum update(Curriculum obj) {
 		
-		return currRepo.save(obj);
+		return curriculumRepo.save(obj);
 	}
 
 	@Override
 	public void delete(int id) {
 		currMessenger.sendDeletionMessage(id);
-		currRepo.deleteById(id);
+		curriculumRepo.deleteById(id);
 		
 	}
 	
