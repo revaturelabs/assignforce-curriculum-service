@@ -34,7 +34,7 @@ public class Curriculum {
 	@Column(name = "name")
 	@NotEmpty(message = "A curriculum must have a name.")
 	@NotNull(message = "A curriculum must have a name.")
-	@Pattern(regexp = "[a-zA-Z1-9]*", message = "Curriculum name has invalid characters.")
+	@Pattern(regexp = "[a-zA-Z0-9. #,!@$%^&()?]*", message = "Curriculum name has invalid characters.")
 	@Size(min = 1, max = 128, message = "The name has to be between 1 and 128 characters in length.")
 	private String name;
 
