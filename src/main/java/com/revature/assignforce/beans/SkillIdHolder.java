@@ -2,8 +2,6 @@ package com.revature.assignforce.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,22 +14,22 @@ public class SkillIdHolder {
 	
 	@Id
 	@Column(name="SKILL_ID")
-	private int skillId;
+	private int id;
 
 	public SkillIdHolder() {
 		super();
 	}
 
-	public SkillIdHolder(int skillId) {
+	public SkillIdHolder(int id) {
 		super();
-		this.skillId = skillId;
+		this.id = id;
 	}
 
-	public int getSkillId() {
-		return skillId;
+	public int getId() {
+		return id;
 	}
 
-	public void setSkillId(int skillId) {
-		this.skillId = skillId;
+	public void setId(int id) {
+		this.id = id;
 	}	
 }

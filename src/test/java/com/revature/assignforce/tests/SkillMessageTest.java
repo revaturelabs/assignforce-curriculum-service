@@ -34,7 +34,7 @@ public class SkillMessageTest {
         String context = "test";
         Integer skillId = 1;
         SkillMessage sm1 = new SkillMessage(context, skillId);
-        assertTrue(sm1.getContext().equals("test") && sm1.getSkillId() == skillId);
+        assertTrue(sm1.getContext().equals("test") && sm1.getId() == skillId);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class SkillMessageTest {
     public void getSetSkillId(){
         Integer skillId = 1;
         SkillMessage sm1 = new SkillMessage();
-        sm1.setSkillId(1);
-        assertTrue(sm1.getSkillId() == skillId);
+        sm1.setId(1);
+        assertTrue(sm1.getId() == skillId);
     }
 }

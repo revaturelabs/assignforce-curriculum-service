@@ -29,7 +29,7 @@ public class AddSkillsMessageListener implements SkillsMessageListener {
         LOG.info("Received -- " + message);
         Map<String, String> messageMap = new ObjectMapper().readValue(message, Map.class);
         SkillMessage sm = new ObjectMapper().readValue(messageMap.get("Message"), SkillMessage.class);
-        SkillIdHolder s = new SkillIdHolder(sm.getSkillId());
+        SkillIdHolder s = new SkillIdHolder(sm.getId());
         skillRepository.save(s);
     }
 }
