@@ -47,7 +47,9 @@ public class Curriculum {
 	private Boolean isCore;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "CURR_SKILLS")
+	@JoinTable(name = "CURR_SKILLS",
+		joinColumns=@JoinColumn(name="CURRICULUM_ID"),
+                inverseJoinColumns=@JoinColumn(name="SKILL_ID"))
 	@NotNull(message = "A curriculum must have skills.")
 	private Set<SkillIdHolder> skills;
 
