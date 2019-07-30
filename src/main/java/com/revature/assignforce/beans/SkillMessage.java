@@ -2,7 +2,7 @@ package com.revature.assignforce.beans;
 
 public class SkillMessage {
     private String context;
-    private Integer skillId;
+    private Integer id;
 
     public String getContext() {
         return context;
@@ -12,20 +12,20 @@ public class SkillMessage {
         this.context = context;
     }
 
-    public Integer getSkillId() {
-        return skillId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSkillId(Integer skillId) {
-        this.skillId = skillId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public SkillMessage() {
 
     }
 
-    public SkillMessage(String context, int skillId) {
+    public SkillMessage(String context, int id) {
         this.context = context;
-        this.skillId = skillId;
+        this.id = id;
     }
 }

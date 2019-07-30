@@ -1,8 +1,5 @@
 package com.revature.assignforce.command;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -28,7 +25,7 @@ public class FindSkillsCommand{
 	 */
 	@HystrixCommand(fallbackMethod = "findSkillFallback")
 	public boolean findSkill(SkillIdHolder skillIdHolder) {
-		ResponseEntity<String> response = restTemplate.getForEntity(gatewayUrl + skillUri + skillIdHolder.getSkillId(), String.class);
+		ResponseEntity<String> response = restTemplate.getForEntity(gatewayUrl + skillUri + skillIdHolder.getId(), String.class);
 		return true;
 	}
 	
