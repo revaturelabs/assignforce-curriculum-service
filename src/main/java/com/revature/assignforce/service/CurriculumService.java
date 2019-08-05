@@ -17,4 +17,6 @@ public interface CurriculumService {
 
 	void delete(int id);
 
+	Curriculum findByName (String name);
+
 }
