@@ -248,31 +248,4 @@ public class CurriculumControllerTest {
 		assertTrue(reTest.getStatusCode() == HttpStatus.OK);
 	}
 
-	@Test
-	public void getByNameTestNotFound() {
-		ResponseEntity<Curriculum> reTest = curriController.getByName("Java");
-		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
-	}
-
-	@Test
-	public void getByNameTestOK() {
-		SkillIdHolder s1 = new SkillIdHolder(1);
-		SkillIdHolder s2 = new SkillIdHolder(2);
-		SkillIdHolder s3 = new SkillIdHolder(3);
-		SkillIdHolder s4 = new SkillIdHolder(4);
-		SkillIdHolder s5 = new SkillIdHolder(5);
-		SkillIdHolder s6 = new SkillIdHolder(6);
-		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
-		skillSet.add(s1);
-		skillSet.add(s2);
-		skillSet.add(s3);
-		skillSet.add(s4);
-		skillSet.add(s5);
-		skillSet.add(s6);
-		Curriculum c1 = new Curriculum(1, "Schedule1", true, true, skillSet);
-		Mockito.when(curriRepository.findByName("Schedule1")).thenReturn(c1);
-		ResponseEntity<Curriculum> reTest = curriController.getByName("Schedule1");
-		assertTrue(reTest.getBody().getName() == "Schedule1" &&  reTest.getStatusCode() == HttpStatus.OK);
-	}
-
 }

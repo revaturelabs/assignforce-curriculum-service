@@ -57,12 +57,7 @@ public class CurriculumServiceImpl implements CurriculumService {
 		curriculumRepo.deleteById(id);
 		
 	}
-
-	@Override
-	public Curriculum findByName(String name) {
-		return curriculumRepo.findByName(name);
-	}
-
+	
 	/**
 	 * Checks for referential integrity. The method will first call FindSkill
 	 * Command and check if the skill exists.

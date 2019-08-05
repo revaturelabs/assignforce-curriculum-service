@@ -38,15 +38,6 @@ public class CurriculumController {
 		return curriculumService.getAll();
 	}
 
-	//findByName
-	@GetMapping(value = "name/{name}")
-	public ResponseEntity<Curriculum> getByName(@PathVariable String name){
-		Curriculum c = curriculumService.findByName(name);
-		if (c == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else return new ResponseEntity<>(c, HttpStatus.OK);
-	}
-
 	// findOne
 	@GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Curriculum> getById(@PathVariable("id") int id) {
