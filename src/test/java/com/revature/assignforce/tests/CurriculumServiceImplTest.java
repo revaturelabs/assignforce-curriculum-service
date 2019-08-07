@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import com.revature.assignforce.command.FindSkillsCommand;
 import com.revature.assignforce.messaging.messenger.CurriculumMessenger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -48,6 +49,8 @@ public class CurriculumServiceImplTest {
 	private CurriculumService curriService;
 	@Autowired
 	private CurriculumRepo curriRepository;
+	@Autowired
+	private CurriculumServiceImpl currisServiceImpl;
 	
 	@Test
 	public void getAllTest() {
@@ -147,6 +150,13 @@ public class CurriculumServiceImplTest {
 		curriService.delete(6);
 		Optional<Curriculum> opTest = curriService.findById(6);
 		assertFalse(opTest.isPresent());
+	}
+
+	@Test
+	public void validateReferencesTest() {
+		Curriculum obj = null;
+		Curriculum testObj = currisServiceImpl.validateReferences(obj);
+		Assert.assertNull(testObj);
 	}
 
 }
