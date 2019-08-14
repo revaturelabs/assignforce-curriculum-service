@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import com.revature.assignforce.command.FindSkillsCommand;
 import com.revature.assignforce.messaging.messenger.CurriculumMessenger;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -43,11 +44,13 @@ public class CurriculumServiceImplTest {
 			return Mockito.mock(CurriculumRepo.class);
 		}
 	}
-	
+
 	@Autowired
 	private CurriculumService curriService;
 	@Autowired
 	private CurriculumRepo curriRepository;
+	@Autowired
+	private CurriculumServiceImpl currisServiceImpl;
 	
 	@Test
 	public void getAllTest() {
@@ -147,6 +150,36 @@ public class CurriculumServiceImplTest {
 		curriService.delete(6);
 		Optional<Curriculum> opTest = curriService.findById(6);
 		assertFalse(opTest.isPresent());
+	}
+
+	@Test
+	public void validateReferencesTest() {
+		Curriculum obj = null;
+		Curriculum testObj = currisServiceImpl.validateReferences(obj);
+		Assert.assertNull(testObj);
+	}
+
+	@Test
+	public void findByNameTest() {
+		SkillIdHolder s1 = new SkillIdHolder(1);
+		SkillIdHolder s2 = new SkillIdHolder(2);
+		SkillIdHolder s3 = new SkillIdHolder(3);
+		SkillIdHolder s4 = new SkillIdHolder(4);
+		SkillIdHolder s5 = new SkillIdHolder(5);
+		SkillIdHolder s6 = new SkillIdHolder(6);
+		HashSet<SkillIdHolder> skillSet = new HashSet<SkillIdHolder>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		skillSet.add(s3);
+		skillSet.add(s4);
+		skillSet.add(s5);
+		skillSet.add(s6);
+		Curriculum c1 = new Curriculum(2, "Schedule8", true, true, skillSet);
+		List<Curriculum> curriList = new ArrayList<>();
+		curriList.add(c1);
+		Mockito.when(curriRepository.findByName("Schedule8")).thenReturn(curriList);
+		List<Curriculum> testList = curriService.findByName("Schedule8");
+		assertTrue(testList.size() == 1);
 	}
 
 }
