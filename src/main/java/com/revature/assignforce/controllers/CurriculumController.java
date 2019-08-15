@@ -48,7 +48,7 @@ public class CurriculumController {
 	}
 
 	//findByName
-	@GetMapping(value = "{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Curriculum>> getByName(@PathVariable("name") String name) {
 		List<Curriculum> cList = curriculumService.findByName(name);
 		if (cList.isEmpty() || cList == null) {
