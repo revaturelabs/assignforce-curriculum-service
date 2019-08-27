@@ -1,6 +1,6 @@
 package com.revature.assignforce.tests;
 
-import com.revature.assignforce.beans.SkillMessage;
+import com.revature.assignforce.messaging.beans.SkillMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
