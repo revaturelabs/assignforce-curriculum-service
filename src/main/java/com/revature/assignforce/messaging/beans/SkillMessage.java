@@ -1,7 +1,10 @@
 package com.revature.assignforce.messaging.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class SkillMessage {
     private String context;
+    @JsonProperty(value="skillId")
     private int id;
 
     public SkillMessage() {
@@ -9,7 +12,7 @@ public class SkillMessage {
 
     public SkillMessage(String context, int skillId) {
         this.context = context;
-        this.skillId = skillId;
+        this.id = skillId;
     }
 
     public String getContext() {
