@@ -47,6 +47,16 @@ public class CurriculumController {
 		return new ResponseEntity<>(c.get(), HttpStatus.OK);
 	}
 
+	//findByName
+	@GetMapping(value = "name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Curriculum>> getByName(@PathVariable("name") String name) {
+		List<Curriculum> cList = curriculumService.findByName(name);
+		if (cList.isEmpty() || cList == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(cList, HttpStatus.OK);
+	}
+
 	// create
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> add(@RequestBody Curriculum curriculum) {
