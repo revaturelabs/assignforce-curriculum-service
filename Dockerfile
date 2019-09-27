@@ -4,7 +4,7 @@ ARG JAR_FILE
 ARG CONFIG_URL
 ARG PROFILE
 ENV CONFIG_URL=$CONFIG_URL
-ENV spring_active_profiles=$PROFILE
+ENV spring_profiles_active=$PROFILE
 COPY src/main/resources/ojdbc7.jar .
 RUN mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
 EXPOSE 8080
