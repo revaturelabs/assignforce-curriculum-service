@@ -2,7 +2,9 @@ FROM maven:3.6.1-jdk-8
 VOLUME /tmp
 ARG JAR_FILE
 ARG CONFIG_URL
+ARG PROFILE
 ENV CONFIG_URL=$CONFIG_URL
+ENV spring_active_profiles=$PROFILE
 COPY src/main/resources/ojdbc7.jar .
 RUN mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
 EXPOSE 8080
