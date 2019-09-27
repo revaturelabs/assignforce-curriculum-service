@@ -1,6 +1,8 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ARG JAR_FILE
+ARG CONFIG_URL
+ENV CONFIG_URL=$CONFIG_URL
 EXPOSE 8080
 COPY ${JAR_FILE} app.jar
 RUN apk update && apk add curl
