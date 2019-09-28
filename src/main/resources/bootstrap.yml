@@ -3,6 +3,8 @@ spring:
     active: ${ACTIVE_PROFILES:default}
   cloud:
     config:
+      name: ${spring.application.name}
+      profile: ${PROFILE}
       uri: ${CONFIG_URL}
   application:
     name: curriculum-service
