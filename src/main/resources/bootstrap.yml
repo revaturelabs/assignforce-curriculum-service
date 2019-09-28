@@ -3,10 +3,12 @@ spring:
     active: ${ACTIVE_PROFILES:default}
   cloud:
     config:
-      name: ${spring.application.name}
-      profile: ${PROFILE:master}
-      label: ${LABEL:master}
-      uri: ${CONFIG_URL}
+      name: curriculum-service
+      profile: ${PROFILE:default}
+      username: ${USERNAME}
+      password: ${PASSWORD}
+      label: ${LABEL:default}
+      uri: ${CONFIG_URL:http://localhost:8888}
   application:
     name: curriculum-service
 management:
