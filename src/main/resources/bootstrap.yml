@@ -8,7 +8,7 @@ spring:
       name: curriculum-service
       profile: ${PROFILE:default}
       label: ${LABEL:default}
-      uri: ${CONFIG_URL:http://localhost:8888}/{application}-{profile}.properties
+      uri: ${CONFIG_URL:http://localhost:8888}/${spring.application.name}-${PROFILE}.properties
 management:
   endpoints:
     web:
