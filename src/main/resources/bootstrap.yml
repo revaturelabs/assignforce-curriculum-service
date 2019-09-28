@@ -5,9 +5,9 @@ spring:
     active: ${PROFILE:default}
   cloud:
     config:
-      name: curriculum-service
-      profile: ${PROFILE:default}
-      label: ${LABEL:default}
+#      name: curriculum-service
+#      profile: ${PROFILE:default}
+#      label: ${LABEL:default}
       uri: ${CONFIG_URL:http://localhost:8888}
 management:
   endpoints:
