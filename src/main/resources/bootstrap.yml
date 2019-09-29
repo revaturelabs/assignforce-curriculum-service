@@ -6,6 +6,8 @@ spring:
   cloud:
     config:
       uri: ${CONFIG_URL:http://localhost:8888}
+      name: curriculum-service
+      profile: ${PROFILE}
 management:
   endpoints:
     web:
