@@ -13,3 +13,5 @@ management:
     web:
       exposure:
         include: health
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
