@@ -20,11 +20,18 @@ import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
+
+/**
+ * POJO to generate the table Curriculum, with the attributes CURR_ID (Primary Key), name, isActive and isCore
+ * and also it has a multiplicity many to many with the table CURR_SKILLS
+ * @author 
+ *
+ */
 @Entity
 @Component
 @Table(name = "Curriculum")
 public class Curriculum {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curr")
 	@SequenceGenerator(name = "curr", sequenceName = "curr_seq", allocationSize = 1)

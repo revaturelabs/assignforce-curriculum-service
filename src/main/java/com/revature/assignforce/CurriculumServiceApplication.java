@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EnableWebSecurity
 @EnableSqs
 public class CurriculumServiceApplication {
-
+	
+	/**
+	 * Main method to run the application.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(CurriculumServiceApplication.class).run(args);
 	}

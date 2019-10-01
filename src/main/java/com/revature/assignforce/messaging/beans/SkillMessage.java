@@ -30,5 +30,6 @@ public class SkillMessage {
     public void setId(int id) {
         this.id = id;
     }
+   
     
 }

@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class SkillMessageTest {
 
+	//This is to send data in format json.
     @Configuration
     static class SkillMessageTestConfiguration {
         @Bean
@@ -28,6 +29,8 @@ public class SkillMessageTest {
         SkillMessage sm1 = new SkillMessage();
         assertNotNull(sm1);
     }
+    
+  //This test is to get the context and compare is equals, if it is different fail.
 
     @Test
     public void SkillMessageTest2(){
@@ -37,6 +40,7 @@ public class SkillMessageTest {
         assertTrue(sm1.getContext().equals("test") && sm1.getId() == skillId);
     }
 
+    //Verify this data is in json format.    
     @Test
     public void getSetContext(){
         String context = "test";

@@ -52,6 +52,10 @@ public class CurriculumServiceImplTest {
 	@Autowired
 	private CurriculumServiceImpl currisServiceImpl;
 	
+	/*
+	 * The test not pass if it doesn't have the same elements in the curritList
+	 */
+	
 	@Test
 	public void getAllTest() {
 		SkillIdHolder s1 = new SkillIdHolder(1);
@@ -121,6 +125,10 @@ public class CurriculumServiceImplTest {
 		Curriculum cTest = curriService.create(c1);
 		assertTrue(cTest.getId() == 5);
 	}
+	
+	/*
+	 * This is a testing to save data in the database.
+	 */
 	
 	@Test
 	public void updateTest() {
