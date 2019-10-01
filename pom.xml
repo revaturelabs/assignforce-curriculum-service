@@ -123,6 +123,27 @@
 			<artifactId>oracle-driver-ojdbc_g</artifactId>
 			<version>12.1.0.2</version>
 		</dependency>
+		
+				<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.8.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.8.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>1.5.15</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -176,28 +197,18 @@
 	<build>
 		<finalName>curriculum-service</finalName>
 		<plugins>
-			<!-- Sonar Scanner -->
 			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.6.0.1398</version>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>sonar</goal>
-						</goals>
-					</execution>
-				</executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
 			</plugin>
-
-			<!-- JaCoCo -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
+				<version>0.8.1</version>
 				<executions>
 					<execution>
+						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
@@ -208,10 +219,6 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
-						<configuration>
-							<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
-							<propertyName>surefireArgLine</propertyName>
-						</configuration>
 					</execution>
 					<execution>
 						<id>post-unit-test</id>
@@ -220,13 +227,17 @@
 							<goal>report</goal>
 						</goals>
 						<configuration>
-							<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+							<dataFile>target/jacoco.exec</dataFile>
+							<outputDirectory>target/jacoco-ut</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

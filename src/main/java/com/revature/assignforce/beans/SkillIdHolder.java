@@ -2,10 +2,11 @@ package com.revature.assignforce.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,22 +16,22 @@ public class SkillIdHolder {
 	
 	@Id
 	@Column(name="SKILL_ID")
-	private int id;
+	private int skillId;
 
 	public SkillIdHolder() {
 		super();
 	}
 
-	public SkillIdHolder(int id) {
+	public SkillIdHolder(int skillId) {
 		super();
-		this.id = id;
+		this.skillId = skillId;
 	}
 
-	public int getId() {
-		return id;
+	public int getSkillId() {
+		return skillId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
 	}	
 }
