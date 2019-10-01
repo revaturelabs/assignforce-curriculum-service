@@ -1,6 +1,6 @@
 package com.revature.assignforce.tests;
 
-import com.revature.assignforce.messaging.beans.SkillMessage;
+import com.revature.assignforce.beans.SkillMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,7 +34,7 @@ public class SkillMessageTest {
         String context = "test";
         Integer skillId = 1;
         SkillMessage sm1 = new SkillMessage(context, skillId);
-        assertTrue(sm1.getContext().equals("test") && sm1.getId() == skillId);
+        assertTrue(sm1.getContext().equals("test") && sm1.getSkillId() == skillId);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class SkillMessageTest {
     public void getSetSkillId(){
         Integer skillId = 1;
         SkillMessage sm1 = new SkillMessage();
-        sm1.setId(1);
-        assertTrue(sm1.getId() == skillId);
+        sm1.setSkillId(1);
+        assertTrue(sm1.getSkillId() == skillId);
     }
 }

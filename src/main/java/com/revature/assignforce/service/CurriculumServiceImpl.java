@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.core.parameters.P;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.revature.assignforce.beans.Curriculum;
@@ -59,28 +57,16 @@ public class CurriculumServiceImpl implements CurriculumService {
 		curriculumRepo.deleteById(id);
 		
 	}
-
-	@Override
-	public List<Curriculum> findByName(String name) {
-		return curriculumRepo.findByName(name);
-	}
-
+	
 	/**
 	 * Checks for referential integrity. The method will first call FindSkill
 	 * Command and check if the skill exists.
 	 * @param obj  to be checked
 	 * @return obj after all, if any, changes are made
 	 */
-
-
-	public Curriculum validateReferences(Curriculum obj) {
-		if (obj != null) {
-			obj.setSkills(obj.getSkills().stream().filter((skillIdHolder) -> findSkills.findSkill(skillIdHolder)).collect(Collectors.toSet()));
-			return obj;
-		} else {
-			return null;
-		}
-
+	private Curriculum validateReferences(Curriculum obj) {
+		obj.setSkills(obj.getSkills().stream().filter((skillIdHolder) -> findSkills.findSkill(skillIdHolder)).collect(Collectors.toSet()));
+		return obj;
 }
 
 }

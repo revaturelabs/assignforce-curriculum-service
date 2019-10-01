@@ -112,14 +112,16 @@ public class CurriculumTest {
 
 
 	@Test
-	public void testValidationShouldReturn2ViolationsOnNullAndEmptyValues() {
+	public void testValidationShouldReturn5ViolationsOnNullAndEmptyValues() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		Validator validator = factory.getValidator();
 		Curriculum curriculum = new Curriculum();
 		curriculum.setName("");
+		curriculum.setIsCore(null);
 		curriculum.setIsActive(null);
+		curriculum.setSkills(null);
 		Set<ConstraintViolation<Curriculum>> violations = validator.validate(curriculum);
-		Assert.assertEquals(2, violations.size());
+		Assert.assertEquals(5, violations.size());
 	}
 
 	@Test
