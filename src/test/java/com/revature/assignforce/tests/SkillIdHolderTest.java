@@ -29,6 +29,8 @@ public class SkillIdHolderTest {
 		assertNotNull(s1);
 	}
 	
+	//Verify if the skill is in the database
+	
 	@Test
 	public void skillIdHolderTest2() {
 		SkillIdHolder s1 = new SkillIdHolder(3);

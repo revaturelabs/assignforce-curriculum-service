@@ -59,6 +59,12 @@ public class CurriculumControllerTest {
 	@Autowired
 	private CurriculumController curriController;
 	
+	/*
+	 * 
+	 * Testing the POJOS SkillIdHolder is a persistent class mapping with the table SKILLIDHOLDER and Curriculum
+	 * is a persistent class for the table Curriculum 
+	 */
+	
 	@Test
 	public void getAllTest() {
 		SkillIdHolder s1 = new SkillIdHolder();
@@ -106,9 +112,13 @@ public class CurriculumControllerTest {
 		assertTrue(reTest.getBody().getId() == 1 &&  reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
+	/*
+	 * Testing and endpoint for curriculum, taking get id 5 and pass the test for no found data in the database
+	 */
+	
 	@Test
 	public void getByIdTestNotFound() {
-		ResponseEntity<Curriculum> reTest = curriController.getById(5);
+		ResponseEntity<Curriculum> reTest = curriController.getById(6);
 		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
 	}
 	
@@ -133,6 +143,8 @@ public class CurriculumControllerTest {
 		assertTrue(((Curriculum) reTest.getBody()).getId() == 12 &&  reTest.getStatusCode() == HttpStatus.CREATED);
 	}
 
+	// this test is when you java invalid request
+	
 	@Test
 	public void shouldReturnMessagesAndBadRequestOnInvalidCurriculum() {
 		SkillIdHolder s1 = new SkillIdHolder(1);

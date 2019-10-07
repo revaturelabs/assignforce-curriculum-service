@@ -9,6 +9,12 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+
+/**
+ * POJO to generate the table SKILLIDHOLDER, with the fields SKILL_ID(Primary Key). 
+ * @author 
+ *
+ */
 @Component
 @Entity
 @Table(name = "SKILLIDHOLDER")

@@ -8,7 +8,6 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.revature.assignforce.beans.Curriculum;
 import com.revature.assignforce.beans.SkillIdHolder;
-import com.revature.assignforce.repos.CurriculumRepo;
-import com.revature.assignforce.service.CurriculumService;
-import com.revature.assignforce.service.CurriculumServiceImpl;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -42,6 +38,8 @@ public class CurriculumTest {
 		Curriculum c1 = new Curriculum();
 		assertNotNull(c1);
 	}
+	
+	//The test fail if getId is no in database
 	
 	@Test
 	public void curriculumTest2() {
@@ -69,6 +67,8 @@ public class CurriculumTest {
 		assertTrue(c1.getId() == 12);
 	}
 	
+	//Test fail is getName is different.
+	
 	@Test
 	public void getSetNameTest() {
 		Curriculum c1 = new Curriculum();
@@ -89,6 +89,8 @@ public class CurriculumTest {
 		c1.setIsCore(true);
 		assertTrue(c1.getIsCore());
 	}
+	
+	//This test does not pass when the skill is not the same size.
 	
 	@Test
 	public void getSetSkills() {

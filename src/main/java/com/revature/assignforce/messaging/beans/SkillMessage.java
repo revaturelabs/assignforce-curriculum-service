@@ -22,5 +22,6 @@ public class SkillMessage {
     public void setSkillId(int skillId) {
         this.skillId = skillId;
     }
+   
     
 }
