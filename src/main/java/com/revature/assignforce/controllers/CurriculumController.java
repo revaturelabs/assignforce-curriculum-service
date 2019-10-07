@@ -1,6 +1,7 @@
 package com.revature.assignforce.controllers;
 import java.util.HashSet;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,6 +24,8 @@ import com.revature.assignforce.service.CurriculumService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -41,7 +44,7 @@ public class CurriculumController {
 	 * 
 	 * @return	List of all Curricula
 	 */
-	@ApiOperation(value = "List All Curricula from the System ", response = Iterable.class, tags = "getAllCurricula")
+	@ApiOperation(value = "List All Curricula from the System ", response = Curriculum.class, responseContainer="List", tags = "CurriculumController")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Curriculum> getAll() {
 		return curriculumService.getAll();
@@ -55,7 +58,10 @@ public class CurriculumController {
 	 * @param id	Find by Id
 	 * @return		RequestEntity
 	 */
-	@ApiOperation(value = "List Curriculum by Id ", response = ResponseEntity.class, tags = "getCurriculumById")
+	@ApiOperation(value = "List Curriculum by Id ", response = Curriculum.class, responseContainer="List", tags = "CurriculumController")
+	@ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 200, message = "OK", response = Curriculum.class)})
 	@GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Curriculum> getById(@PathVariable("id") int id) {
 		Optional<Curriculum> c = curriculumService.findById(id);
@@ -78,7 +84,10 @@ public class CurriculumController {
 	 * @param curriculum create with unique id, name, isActive, isCore, skills
 	 * @return			 ResponseEntity
 	 */
-	@ApiOperation(value = "Create a Curriculum to insert into the System ", response = ResponseEntity.class, tags = "addCurriculum")
+	@ApiOperation(value = "Create a Curriculum to insert into the System ", tags = "CurriculumController")
+	@ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 201, message = "Created", response = Curriculum.class)})
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> add(@RequestBody Curriculum curriculum) {
 		if (curriculum == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -115,7 +124,10 @@ public class CurriculumController {
 	 * @param curriculum update id, name, isActive, isCore, skills
 	 * @return 			 ResponseEntity
 	 */
-	@ApiOperation(value = "Update Curriculum Information", response = ResponseEntity.class, tags = "updateCurriculum")
+	@ApiOperation(value = "Update Curriculum Information", tags = "CurriculumController")
+	@ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 201, message = "Created", response = Curriculum.class)})
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> update(@RequestBody Curriculum curriculum) {
 		if (curriculum == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -140,7 +152,7 @@ public class CurriculumController {
 	 * @param id 	Curriculum by Id
 	 * @return		ResponseEntity
 	 */
-	@ApiOperation(value = "Delete Curriculum from the System ", response = ResponseEntity.class, tags = "deleteCurriculum")
+	@ApiOperation(value = "Delete Curriculum from the System ", response = Curriculum.class, responseContainer="List", tags = "CurriculumController")
 	@DeleteMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Curriculum> delete(@PathVariable("id") int id) {
 		curriculumService.delete(id);
