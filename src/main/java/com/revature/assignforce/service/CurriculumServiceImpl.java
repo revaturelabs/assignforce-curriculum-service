@@ -17,6 +17,11 @@ import com.revature.assignforce.command.FindSkillsCommand;
 
 @Service
 @Transactional
+/*
+ * Only users with role SVP can have access to 
+ * these methods.
+ */
+//@PreAuthorize("hasRole('SVP')")
 public class CurriculumServiceImpl implements CurriculumService {
 	
 	@Autowired
