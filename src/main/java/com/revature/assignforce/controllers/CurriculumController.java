@@ -58,7 +58,7 @@ public class CurriculumController {
 	 * @param id	Find by Id
 	 * @return		RequestEntity
 	 */
-	@ApiOperation(value = "List Curriculum by Id ", response = Curriculum.class, responseContainer="List", tags = "CurriculumController")
+	@ApiOperation(value = "List Curriculum by Id ", response = Curriculum.class, tags = "CurriculumController")
 	@ApiResponses(value = {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 200, message = "OK", response = Curriculum.class)})
@@ -152,7 +152,7 @@ public class CurriculumController {
 	 * @param id 	Curriculum by Id
 	 * @return		ResponseEntity
 	 */
-	@ApiOperation(value = "Delete Curriculum from the System ", response = Curriculum.class, responseContainer="List", tags = "CurriculumController")
+	@ApiOperation(value = "Delete Curriculum from the System ", response = Curriculum.class, tags = "CurriculumController")
 	@DeleteMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Curriculum> delete(@PathVariable("id") int id) {
 		curriculumService.delete(id);
