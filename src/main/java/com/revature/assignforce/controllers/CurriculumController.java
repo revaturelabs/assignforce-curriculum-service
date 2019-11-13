@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import javax.validation.ValidatorFactory;
 import javax.xml.validation.Validator;
 
 @RestController
+
 public class CurriculumController {
 
 	@Autowired
@@ -34,12 +36,14 @@ public class CurriculumController {
 
 	// findAll
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("isAuthenticated() and hasAnyRole('SVP of Technology','Trainer','Manager of Technology','Center Head')")
 	public List<Curriculum> getAll() {
 		return curriculumService.getAll();
 	}
 
 	// findOne
 	@GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("isAuthenticated() and hasAnyRole('SVP of Technology','Trainer','Manager of Technology','Center Head')")
 	public ResponseEntity<Curriculum> getById(@PathVariable("id") int id) {
 		Optional<Curriculum> c = curriculumService.findById(id);
 		if (!c.isPresent())
@@ -49,6 +53,7 @@ public class CurriculumController {
 
 	//findByName
 	@GetMapping(value = "name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("isAuthenticated() and hasAnyRole('SVP of Technology','Trainer','Manager of Technology','Center Head')")
 	public ResponseEntity<List<Curriculum>> getByName(@PathVariable("name") String name) {
 		List<Curriculum> cList = curriculumService.findByName(name);
 		if (cList.isEmpty() || cList == null) {
@@ -59,6 +64,7 @@ public class CurriculumController {
 
 	// create
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("isAuthenticated() and hasRole('SVP of Technology')")
 	public ResponseEntity<Object> add(@RequestBody Curriculum curriculum) {
 		if (curriculum == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		Set<ConstraintViolation<Curriculum>> violations =
@@ -78,6 +84,7 @@ public class CurriculumController {
 
 	// update
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("isAuthenticated() and hasRole('SVP of Technology')")
 	public ResponseEntity<Object> update(@RequestBody Curriculum curriculum) {
 		if (curriculum == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		Set<ConstraintViolation<Curriculum>> violations =
@@ -97,6 +104,7 @@ public class CurriculumController {
 
 	// delete
 	@DeleteMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("isAuthenticated() and hasRole('SVP of Technology')")
 	public ResponseEntity<Curriculum> delete(@PathVariable("id") int id) {
 		curriculumService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
